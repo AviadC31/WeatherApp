@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+  <link href='https://css.gg/css' rel='stylesheet'>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@700&display=swap" rel="stylesheet">
+</head>
+
+<body onload="loadPage()" >
+  <div id="cover">
+    <div class="tb">
+      <div class="td"><input type="text" id="cityNameInput" placeholder="City" required></div>
+      <div class="td" id="s-cover">
+        <button type="submit" onclick="handleSearch()">
+          <div id="s-circle"></div>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="citiesContainer"></div>
+
+  <script id="citiesTemplate" type="text/x-handlebars-template">
+        <div class="Container">
+            {{#each data}}
+            <div class="city" onclick="backgroundSwitch(this)">
+                <div class="temperature">{{temperature}}°</div>
+                <img class="icon" src={{conditionPic}}>
+                <div class="name">{{name}}</div>
+                <div class="condition">{{condition}}</div>
+              {{#if (isExistInDB true)}}
+                <button class="sdBtn" onclick=cityDelete(this)>
+                  <img class="delIcon" src="https://flyclipart.com/thumb2/delete-icon-327000.png">
+                </button>
+              {{else}}
+                <button class="sdBtn" onclick=citySave(this)>
+                  <img class="saveIcon" src="https://www.pinclipart.com/picdir/big/41-413962_png-to-icon-converter-download-save-black-icon.png">
+                </button>
+              {{/if}}
+                <button class="rBtn" onclick=updateCity(this)>
+                  <img class="refIcon" src="https://w7.pngwing.com/pngs/525/527/png-transparent-loop-arrow-icon-angle-black-white-font-arrow-refresh-reload-icon-miscellaneous-white-text-thumbnail.png">
+                </button>    
+            </div>
+            {{/each}}
+        </div>
+    </script>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+    crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+  <script src="apiManager.js"></script>
+  <script src="Renderer.js"></script>
+  <script src="conditions.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

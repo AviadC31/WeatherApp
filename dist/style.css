@@ -1,0 +1,239 @@
+*
+{
+    outline: none;
+}
+
+html, body
+{
+    height: 100%;
+    min-height: 100%;
+}
+
+body
+{
+    font-family: 'Josefin Sans', sans-serif;
+    background-image: url('./gifs/night.png');
+    background-repeat: no-repeat;
+    background-size: 100vw 110vh;
+    
+}
+
+.tb
+{
+    display: table;
+    width: 100%;
+}
+
+.td
+{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+input, button
+{
+    color: #fff;
+    padding: 0;
+    margin: 0;
+    border: 0;
+    background-color: transparent;
+}
+
+#cover
+{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    margin-top: 15px;
+    background-color: rgba(255, 255, 255, 0.055);
+    border-radius: 20px;
+    box-shadow: 0 0 1px 1px rgba(255, 255, 255, 0.26), 0 0 0 2px #a3a0a080;
+    transform: scale(0.6);
+}
+
+input[type="text"]
+{
+    padding-left: 5%;
+    width: 96%;
+    height: 50%;
+    font-size: 200%;
+    line-height: 1;
+    font-family: 'Josefin Sans', sans-serif;
+    background: none;
+}
+
+input[type="text"]::placeholder
+{
+    padding-left: 3%;
+    color: #ffffff;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+#s-cover
+{
+    width: 1px;
+    padding-left: 35px;
+}
+
+button
+{
+    position: relative;
+    display: block;
+    width: 100%;
+    cursor: pointer;
+}
+
+#s-circle
+{
+    position: relative;
+    top: -3px;
+    left: -20px;
+    width: 15px;
+    height: 15px;
+    margin-top: 0;
+    border-width: 15px;
+    border: 8px solid #fff;
+    border-radius: 50%;
+    transition: 0.5s ease all;
+}
+
+button span
+{
+    position: absolute;
+    top: 68px;
+    left: 43px;
+    display: block;
+    width: 40px;
+    height: 15px;
+    background-color: transparent;
+    border-radius: 10px;
+    transform: rotateZ(52deg);
+    transition: 0.5s ease all;
+}
+
+button span:before, button span:after
+{
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    right: 82px;
+    width: 20px;
+    height: 11px;
+    background-color: #fff;
+    border-radius: 10px;
+    transform: rotateZ(0);
+    transition: 0.5s ease all;
+}
+
+#s-cover:hover #s-circle
+{
+    top: -1px;
+    width: 70px;
+    height: 10px;
+    border-width: 0;
+    background-color: #fff;
+    border-radius: 20px;
+}
+
+#s-cover:hover span
+{
+    top: 50%;
+    left: 56px;
+    width: 20px;
+    margin-top: -10px;
+    transform: rotateZ(0);
+}
+
+#s-cover:hover button span:before
+{
+    bottom: 5px;
+    transform: rotateZ(53deg);
+}
+
+#s-cover:hover button span:after
+{
+    bottom: -5px;
+    transform: rotateZ(-53deg);
+}
+#s-cover:hover button span:before, #s-cover:hover button span:after
+{
+    right: 22px;
+    width: 25px;
+    background-color: #fff;
+}
+
+.rBtn,.sdBtn{
+  color: #6962c7;
+  background-color: white ;
+  font-size: larger;
+  border-radius: 50%;
+  margin-bottom: 10px;
+  width: 35px;
+  height: 35px;
+  box-shadow: 0 3px 15px #6962c7, 0 0 0 3px #ffffffeb;
+  align-self: center;
+  justify-self: center;
+}
+.rBtn{
+    grid-area: rBtn;
+}
+.sdBtn{
+    grid-area: sdBtn;
+}
+
+.Container{
+  display: flex;
+  flex-wrap: wrap;
+  margin: 5px;
+  justify-items: center;
+  align-items: center;
+}
+
+.city{
+  position: relative;
+  display: grid;
+  grid-template-areas: 
+    "city city img img temp temp "
+    "rBtn sdBtn img img cond cond";
+  top: 70px;
+  width: 100%;
+  border-radius: 20px;
+  border-color: #e16868;
+  background: rgba(255, 255, 255, 0.212);
+  list-style: none;
+  margin: 5px;
+}
+
+.temperature{
+    grid-area: temp;
+    justify-self: center;
+    align-self: center;
+    font-size: 300%;
+}
+
+.name{
+    grid-area: city;
+    justify-self: center;
+    align-self: center;
+    font-size: 200%;
+}
+
+.condition{
+    grid-area: cond;
+    justify-self: center;
+    align-self: center;
+    font-size: 100%;
+}
+.icon{
+    justify-self: center;
+    align-self: center;
+    grid-area: img;
+    width: 25vw;
+}
+.refIcon,.delIcon,.saveIcon{
+    max-width: 50%;
+    max-height: 50%;
+}
