@@ -5,15 +5,21 @@ const router = express.Router()
 
 router.get('/city/:cityName', function (req, res) {
     const { cityName } = req.params
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=df800d2e6236c8f256184f68d6cbef06`)
+    const { lat, lon } = req.query
+    if(cityName === "noCity"){
+         queryBy = `lat=${lat}&lon=${lon}`
+    } else {
+        queryBy = `q=${cityName}`
+    }
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?${queryBy}&appid=df800d2e6236c8f256184f68d6cbef06`)
         .then(function (response) {
             const info = response.data
             const cityDetails = {
                 name: info.name,
                 temperature: Math.round(info.main.temp - 273),
                 condition: info.weather[0].description,
-                conditionPic: 'https://download.spinetix.com/content/widgets/icons/weather/' +
-                    info.weather[0].icon + '.png'
+                conditionPic: 'https://download.spinetix.com/content/widgets/icons/weather/' 
+                + info.weather[0].icon + '.png'
             }
             res.send(cityDetails)
         })
@@ -57,5 +63,8 @@ router.put('/city/:cityName', function (req, res) {
 })
 
 module.exports = router
+
+
+
 
 

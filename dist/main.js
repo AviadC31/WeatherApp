@@ -1,28 +1,27 @@
 const renderer = new Renderer()
 const manager = new ApiManager()
 
-const cityObj = () => manager.cityData[manager.cityData.length - 1]
-
-const conditionUpdateCheck = (el) => $(el).find(".condition").text()
-
-const appendNewBackground = (url) => $("body").css("background-image", url);
-
 const loadPage = async function () {
+    getCoords()
     await manager.getDataFromDB()
-    renderer.renderData(manager.cityData, 'cities', true)
+    manager.cityData.unshift(JSON.parse(localStorage.currentLocation))
+    render(manager.cityData, 'cities', true)
 }
 
 const handleSearch = async function () {
     const input = $("#cityNameInput").val()
-    const check = await manager.getCityData(input)
-    if(check) renderer.renderData([cityObj()], 'cities')
+    const found = manager.cityData.find(c => c.name === firstCharToUpper(input))
+    if (found == undefined) {
+        const check = await manager.getCityData(input)
+        if (check) render([cityObj()], 'cities')
+    } else alert("this city is already displayed")
 }
 
 const citySave = async function (el) {
     const cityName = $(el).siblings(".name").text()
     manager.saveCity(cityName)
     $(el).parent()
-            .append( `<button class="sdBtn" onclick=cityDelete(this)>
+        .append(`<button class="sdBtn" onclick=cityDelete(this)>
                         <img class="delIcon" src="https://flyclipart.com/thumb2/delete-icon-327000.png">
                       </button>`)
     $(el).remove()
@@ -38,9 +37,7 @@ const updateCity = async function (el) {
     const cityName = $(el).siblings(".name").text()
     await manager.getCityData(cityName)
     manager.refreshCity(cityName)
-    $(el).siblings(".temperature").text(cityObj().temperature + '°')
-    $(el).siblings(".condition").text(cityObj().condition)
-    $(el).siblings(".icon").attr("src", cityObj().conditionPic)
+    displayUpdated(el)
 }
 
 const backgroundSwitch = function (el) {

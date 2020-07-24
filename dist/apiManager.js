@@ -10,17 +10,23 @@ class ApiManager {
         this.cityData = [...cities]
     }
 
-    async getCityData(input) {
-        const city = await $.get(`/city/${input}`)
-        if(city.name!=='Error') {
-            this.cityData.push(city)
-            return true
+    async getCityData(input, lat, lng) {
+        if (input === "noCity") {
+            const currentLocation = await $.get(`/city/${input}?lat=${lat}&lon=${lng}`)
+            localStorage.clear()
+            localStorage.currentLocation = JSON.stringify(currentLocation)
+        } else {
+            const city = await $.get(`/city/${input}`)
+            if (city.name !== 'Error') {
+                this.cityData.push(city)
+                return true
+            }
         }
     }
 
     saveCity = function (cityName) {
         $.post(`/city`, this.cityData[this.indexFinder(cityName)])
-        }
+    }
 
     removeCity = function (cityName) {
         this.ajaxReq(cityName, "DELETE")
@@ -30,7 +36,7 @@ class ApiManager {
         this.ajaxReq(cityName, "PUT")
     }
 
-    async ajaxReq(cityName, method) {  
+    async ajaxReq(cityName, method) {
         const city = await $.ajax({
             url: `/city/${cityName}`,
             method: method,
@@ -39,8 +45,8 @@ class ApiManager {
                 console.log(`${method} complete`)
             }
         })
-       if (city.name !=='Error'){
-        this.cityData.splice(this.indexFinder(cityName), 1)
-       }
+        if (city.name !== 'Error') {
+            this.cityData.splice(this.indexFinder(cityName), 1)
+        }
     }
 }
