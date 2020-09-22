@@ -5,6 +5,12 @@ class ApiManager {
     }
     indexFinder = cityName => this.cityData.findIndex(c => c.name === cityName)
 
+    saveCity = cityName => $.post(`/city`, this.cityData[this.indexFinder(cityName)]) 
+
+    removeCity = cityName => this.ajaxReq(cityName, "DELETE") 
+
+    refreshCity = cityName => this.ajaxReq(cityName, "PUT") 
+
     async getDataFromDB() {
         const cities = await $.get('/cities')
         this.cityData = [...cities]
@@ -22,18 +28,6 @@ class ApiManager {
                 return true
             }
         }
-    }
-
-    saveCity = function (cityName) {
-        $.post(`/city`, this.cityData[this.indexFinder(cityName)])
-    }
-
-    removeCity = function (cityName) {
-        this.ajaxReq(cityName, "DELETE")
-    }
-
-    refreshCity = function (cityName) {
-        this.ajaxReq(cityName, "PUT")
     }
 
     async ajaxReq(cityName, method) {

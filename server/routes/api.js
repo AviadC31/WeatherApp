@@ -33,13 +33,13 @@ router.get('/cities', function (req, res) {
 router.post('/city', function (req, res) {
     const city = new City(req.body)
     city.save()
-        .then(function (city) { console.log(`${city.name}'s data has saved in the DB`) })
+        .then(function (city) { console.log(`${city.name}'s data has saved in DB`) })
     res.end()
 })
 
 router.delete('/city/:cityName', function (req, res) {
     const { cityName } = req.params
-    City.remove({ name: cityName })
+    City.deleteOne({ name: cityName })
         .then(results => res.end())
 })
 

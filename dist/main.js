@@ -20,10 +20,9 @@ const handleSearch = async function () {
 const citySave = async function (el) {
     const cityName = $(el).siblings(".name").text()
     manager.saveCity(cityName)
-    $(el).parent()
-        .append(`<button class="sdBtn" onclick=cityDelete(this)>
-                        <img class="delIcon" src="https://flyclipart.com/thumb2/delete-icon-327000.png">
-                      </button>`)
+    $(el).parent().append(`<button class="sdBtn" onclick=cityDelete(this)>
+                            <img class="delIcon" src="https://flyclipart.com/thumb2/delete-icon-327000.png">
+                           </button>`)
     $(el).remove()
 }
 

@@ -1,6 +1,7 @@
 condition = {
     "thunderstorm": "url('./gifs/thunderstorm.gif')",
     "thunderstorm with light rain": "url('./gifs/thunderstormPlusRain.gif')",
+    "light intensity drizzle": "url('./gifs/thunderstormPlusRain.gif')",
     "light rain": "url('./gifs/moderateRain.gif')",
     "moderate rain": "url('./gifs/raining.gif')",
     "shower rain": "url('./gifs/heavyRain.gif')",
