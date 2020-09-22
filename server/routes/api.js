@@ -11,7 +11,7 @@ router.get('/city/:cityName', function (req, res) {
     } else {
         queryBy = `q=${cityName}`
     }
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?${queryBy}&appid=df800d2e6236c8f256184f68d6cbef06`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?${queryBy}&appid=${process.env.API_ID}`)
         .then(function (response) {
             const info = response.data
             const cityDetails = {

@@ -8,7 +8,7 @@ const port = process.env.PORT || 8080
 
 mongoose.set('useFindAndModify', false)
 // mongoose.connect("mongodb://localhost/WeatherApp")
-mongoose.connect("mongodb+srv://AviadC31:Ac305551236@aviadc31db.wrojt.mongodb.net/WeatherApp?retryWrites=true&w=majority")
+mongoose.connect(process.env.MONGO_URI)
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
