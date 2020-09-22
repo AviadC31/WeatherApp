@@ -16,4 +16,8 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use('/', api)
 
+app.get('/', function(req, res){
+  res.redirect('/todo');
+});
+
 app.listen(port, () => console.log("Server up and running on port" + port))
