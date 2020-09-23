@@ -10,11 +10,7 @@ const port = process.env.PORT || 8080
 mongoose.set('useFindAndModify', false)
 // mongoose.connect("mongodb://localhost/WeatherApp")
 
-    mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/TodoApp', { useNewUrlParser: true })
-            .then(connect => console.log('connected to mongodb..'))
-            .catch(e => console.log('could not connect to mongodb', e))
-    
-    module.exports = {mongoose}
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/WeatherApp', { useNewUrlParser: true })
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))

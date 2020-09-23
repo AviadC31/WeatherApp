@@ -5,7 +5,7 @@ class ApiManager {
     }
     indexFinder = cityName => this.cityData.findIndex(c => c.name === cityName)
 
-    saveCity = cityName => $.post(`https://weather-app-jquery-mongo.herokuapp.com/city`, this.cityData[this.indexFinder(cityName)]) 
+    saveCity = cityName => $.post(`/city`, this.cityData[this.indexFinder(cityName)]) 
 
     removeCity = cityName => this.ajaxReq(cityName, "DELETE") 
 
@@ -18,11 +18,11 @@ class ApiManager {
 
     async getCityData(input, lat, lng) {
         if (input === "noCity") {
-            const currentLocation = await $.get(`https://weather-app-jquery-mongo.herokuapp.com/city/${input}?lat=${lat}&lon=${lng}`)
+            const currentLocation = await $.get(`/city/${input}?lat=${lat}&lon=${lng}`)
             localStorage.clear()
             localStorage.currentLocation = JSON.stringify(currentLocation)
         } else {
-            const city = await $.get(`https://weather-app-jquery-mongo.herokuapp.com/city/${input}`)
+            const city = await $.get(`/city/${input}`)
             if (city.name !== 'Error') {
                 this.cityData.push(city)
                 return true
@@ -32,7 +32,7 @@ class ApiManager {
 
     async ajaxReq(cityName, method) {
         const city = await $.ajax({
-            url: `https://weather-app-jquery-mongo.herokuapp.com/city/${cityName}`,
+            url: `/city/${cityName}`,
             method: method,
             data: this.cityData[this.cityData.length - 1],
             success: function (response) {
