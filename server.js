@@ -13,11 +13,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/WeatherApp',
         useFindAndModify: false
     }
 )
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function(err, resp){
-  console.log(resp);
-});
+mongoose.connection.on('connected', () => {
+    console.log('db on!!!!!!!!!!!!!!')
+})
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
