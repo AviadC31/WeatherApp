@@ -13,14 +13,11 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/WeatherApp',
         useFindAndModify: false
     }
 )
-mongoose.connection.on('connected', () => {
-    console.log('db on!!!!!!!!!!!!!!')
-})
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/', api)
+app.use('/api', api)
 
 app.listen(port, () => console.log("Server up and running on port " + port))
