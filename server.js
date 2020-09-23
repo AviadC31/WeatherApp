@@ -7,10 +7,17 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const port = process.env.PORT || 8080
 
-mongoose.set('useFindAndModify', false)
-// mongoose.connect("mongodb://localhost/WeatherApp")
-
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/WeatherApp', { useNewUrlParser: true })
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/WeatherApp',
+    {
+        useNewUrlParser: true,
+        useFindAndModify: false
+    }
+)
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function(err, resp){
+  console.log(resp);
+});
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
