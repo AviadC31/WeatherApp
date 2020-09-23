@@ -10,17 +10,7 @@ const port = process.env.PORT || 8080
 mongoose.set('useFindAndModify', false)
 // mongoose.connect("mongodb://localhost/WeatherApp")
 
-mongoose.connect(process.env.MONGODB_URI,
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-        useFindAndModify: false,
-    },
-    err => {
-        console.log('Connection to DB failed')
-        console.log(err)
-    }
-)
+mongoose.connect(`${process.env.MONGODB_URI}`)
 
 app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
