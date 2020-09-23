@@ -11,7 +11,7 @@ condition = {
     "overcast clouds": "url('https://media.giphy.com/media/67uxmHhIF3uh6Ph8ew/giphy.gif ')",
     "scattered clouds": "url('./gifs/windy.JPG ')",
     "mostly cloudy": "url('.https://media.giphy.com/media/67uxmHhIF3uh6Ph8ew/giphy.gif ')",
-    "few clouds": "url('./gifs/windy.JPG ')",
+    "few clouds": "url('./gifs/windy.jpg ')",
     "mist": "url('./gifs/haze.gif')",
     "clear sky": "url('./gifs/clear.gif')",
     "haze": "url('./gifs/haze.gif')"
