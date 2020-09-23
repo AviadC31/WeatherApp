@@ -34,7 +34,7 @@ router.post('/city', function (req, res) {
     const city = new City(req.body)
     city.save()
         .then(function (city) { console.log(`${city.name}'s data has saved in DB`) })
-    res.end()
+    res.end('saving error')
 })
 
 router.delete('/city/:cityName', function (req, res) {
