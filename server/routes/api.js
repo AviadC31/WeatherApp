@@ -6,8 +6,8 @@ const router = express.Router()
 router.get('/city/:cityName', function (req, res) {
     const { cityName } = req.params
     const { lat, lon } = req.query
-    if(cityName === "noCity"){
-         queryBy = `lat=${lat}&lon=${lon}`
+    if (cityName === "noCity") {
+        queryBy = `lat=${lat}&lon=${lon}`
     } else {
         queryBy = `q=${cityName}`
     }
@@ -18,8 +18,8 @@ router.get('/city/:cityName', function (req, res) {
                 name: info.name,
                 temperature: Math.round(info.main.temp - 273),
                 condition: info.weather[0].description,
-                conditionPic: 'https://download.spinetix.com/content/widgets/icons/weather/' 
-                + info.weather[0].icon + '.png'
+                conditionPic: 'https://download.spinetix.com/content/widgets/icons/weather/'
+                    + info.weather[0].icon + '.png'
             }
             res.send(cityDetails)
         })
@@ -32,9 +32,10 @@ router.get('/cities', function (req, res) {
 
 router.post('/city', function (req, res) {
     const city = new City(req.body)
+    console.log(city)
     city.save()
-        .then(function (city) { console.log(`${city.name}'s data has saved in DB`) })
-    res.end('saving error')
+        .then(function (city) { res.send(`${city.name}'s data has saved in DB`) })
+        .catch(function (city) { res.send('saving error') })
 })
 
 router.delete('/city/:cityName', function (req, res) {
