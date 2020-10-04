@@ -18,6 +18,6 @@ app.use(express.static(path.join(__dirname, 'dist')))
 app.use(express.static(path.join(__dirname, 'node_modules')))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: false }))
-app.use('/api', api)
+app.use('/', api)
 
 app.listen(port, () => console.log("Server up and running on port " + port))

@@ -5,24 +5,24 @@ class ApiManager {
     }
     indexFinder = cityName => this.cityData.findIndex(c => c.name === cityName)
 
-    saveCity = cityName => $.post(`/api/city`, this.cityData[this.indexFinder(cityName)]) 
+    saveCity = cityName => $.post(`/city`, this.cityData[this.indexFinder(cityName)]) 
 
     removeCity = cityName => this.ajaxReq(cityName, "DELETE") 
 
     refreshCity = cityName => this.ajaxReq(cityName, "PUT") 
 
     async getDataFromDB() {
-        const cities = await $.get('/api/cities')
+        const cities = await $.get('/cities')
         this.cityData = [...cities]
     }
 
     async getCityData(input, lat, lng) {
         if (input === "noCity") {
-            const currentLocation = await $.get(`/api/city/${input}?lat=${lat}&lon=${lng}`)
+            const currentLocation = await $.get(`/city/${input}?lat=${lat}&lon=${lng}`)
             localStorage.clear()
             localStorage.currentLocation = JSON.stringify(currentLocation)
         } else {
-            const city = await $.get(`/api/city/${input}`)
+            const city = await $.get(`/city/${input}`)
             if (city.name !== 'Error') {
                 this.cityData.push(city)
                 return true
@@ -32,7 +32,7 @@ class ApiManager {
 
     async ajaxReq(cityName, method) {
         const city = await $.ajax({
-            url: `/api/city/${cityName}`,
+            url: `/city/${cityName}`,
             method: method,
             data: this.cityData[this.cityData.length - 1],
             success: function (response) {
