@@ -19,6 +19,7 @@ class ApiManager {
     async getCityData(input, lat, lng) {
         if (input === "noCity") {
             const currentLocation = await $.get(`/city/${input}?lat=${lat}&lon=${lng}`)
+            console.log(currentLocation)
             localStorage.clear()
             localStorage.currentLocation = JSON.stringify(currentLocation)
         } else {

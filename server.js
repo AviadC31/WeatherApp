@@ -5,12 +5,13 @@ const api = require('./server/routes/api')
 const app = express()
 const mongoose = require('mongoose')
 require('dotenv').config()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 6060
 
 mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/WeatherApp',
     {
         useNewUrlParser: true,
-        useFindAndModify: false
+        useFindAndModify: false,
+        useUnifiedTopology: true 
     }
 )
 
